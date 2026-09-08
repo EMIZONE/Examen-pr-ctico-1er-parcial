@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinocho - Lies of P</title>
+    <!-- Bulma CSS Framework -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --lop-dark: #12151c;
+            --lop-card-bg: #1c212c;
+            --lop-red: #8b1e24;
+            --lop-red-hover: #a8252d;
+            --lop-blue: #2c5270;
+            --lop-blue-light: #3e6e96;
+            --lop-gold: #c5a059;
+        }
+
+        body {
+            background-color: var(--lop-dark);
+            color: #d1d5db;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+
+        /* Hero superior estilo ficha de personaje */
+        .character-header {
+            background: linear-gradient(135deg, #181d28 0%, #0d0f14 100%);
+            border-bottom: 3px solid var(--lop-red);
+            padding: 3rem 1.5rem;
+        }
+
+        .text-body {
+            line-height: 1.7;
+            color: #d1d5db;
+        }
+
+        /* Tarjeta de visualización del personaje */
+        .character-card-box {
+            background-color: var(--lop-card-bg);
+            border: 1px solid #2a3242;
+            border-radius: 12px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .character-card-box::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 20px;
+            height: 20px;
+            border-top: 2px solid var(--lop-gold);
+            border-left: 2px solid var(--lop-gold);
+        }
+
+        .character-card-box::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            border-bottom: 2px solid var(--lop-gold);
+            border-right: 2px solid var(--lop-gold);
+        }
+
+        
+
+        /* Tarjetas de contenido (Historia y Estadísticas) */
+        .content-box {
+            background-color: var(--lop-card-bg);
+            border: 1px solid #2a3242;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        /* Estilos de títulos con acento rojo */
+        .section-title-custom {
+            border-left: 4px solid var(--lop-red);
+            padding-left: 12px;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        /* Barras de estadísticas personalizadas */
+        .stat-bar-container {
+            background-color: #252c3c;
+            border-radius: 6px;
+            height: 12px;
+            overflow: hidden;
+            display: flex;
+            gap: 3px;
+            padding: 2px;
+            margin-top: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .stat-segment {
+            flex: 1;
+            background-color: #384259;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+
+        .stat-segment.active-red {
+            background-color: var(--lop-red);
+        }
+
+        .stat-segment.active-blue {
+            background-color: var(--lop-blue-light);
+        }
+
+        .tag-badge {
+            background-color: var(--lop-red) !important;
+            color: white !important;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="character-header">
+        <div class="container">
+            <div class="columns is-vcentered is-centered">
+                <!-- Avatar circular principal del personaje -->
+                <div class="column is-3 has-text-centered">
+                    <figure class="image is-256x256 is-inline-block">
+                        <img class="is-rounded" src="/images/Pinoccio.png" alt="Pinocho Avatar" style="border: 3px solid var(--lop-gold);" onerror="this.src='https://placehold.co/200x200/1c212c/c5a059?text=P'">
+                    </figure>
+                </div>
+                <!-- Información principal de presentación -->
+                <div class="column is-8">
+                    <span class="tag tag-badge mb-2">TÍTERE DE GEPETTO</span>
+                    <h1 class="title is-2 text-white has-text-white mb-1" style="color: #ffffff !important;">PINOCHO</h1><b></b>
+                    <p class="subtitle is-5" style="color: var(--lop-gold);">El Títere Cazador</p>
+                    <div class="mb-3" style="color: #fbbf24;">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star" style="color: #6b7280;"></i>
+                    </div>
+                    <p class="mb-4" style="color: #9ca3af; max-width: 700px;">
+                        Creado por el maestro Gepetto en la sombría y bellísima ciudad de Krat, este autómata avanzado despierta sin voz ni recuerdos, guiado únicamente por una misteriosa voz y la compleja carga de elegir entre la verdad y la mentira.
+                    </p>
+                    <div class="buttons">
+                        <a href="#historia" class="button is-danger" style="background-color: var(--lop-red);">
+                            <span class="icon"><i class="fas fa-book-open"></i></span>
+                            <span>Ver historia</span>
+                        </a>
+                        <a href="#estadisticas" class="button is-light" style="background-color: #2c3548; color: #ffffff; border: 1px solid #3d4a65;">
+                            <span class="icon"><i class="fas fa-chart-bar"></i></span>
+                            <span>Ver estadísticas</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container my-6 px-3">
+        <div class="columns is-centered">
+            <!-- Columna Izquierda: Tarjeta visual estilo cromado/portada -->
+            <div class="column is-4-desktop is-6-tablet">
+                <div class="character-card-box">
+                    <div class="is-flex is-justify-content-space-between is-align-items-center mb-3">
+                        <span class="tag is-dark border" style="border: 1px solid var(--lop-gold); color: var(--lop-gold); font-family: monospace;">Nº 01</span>
+                        <span class="icon" style="color: var(--lop-gold);"><i class="fas fa-chess-rook"></i></span>
+                    </div>
+                    <figure class="image is-3by4 mb-3" style="border-radius: 8px; overflow: hidden; background-color: #12151c;">
+                        <img src="/images/pinoccio img.jpg" alt="Pinocho Arte Conceptual" onerror="this.src='https://placehold.co/400x550/161a24/ffffff?text=Pinocho'">
+                    </figure>
+                    <div class="has-text-centered">
+                        <h3 class="title is-4 mb-1 has-text-white" style="color: #fff !important;">PINOCHO</h3><b></b>
+                        <p class="subtitle is-6" style="color: var(--lop-gold);">EL TÍTERE MECÁNICO</p>
+                        <div style="color: #fbbf24;">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star" style="color: #6b7280;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna Derecha: Lore e Historia + Estadísticas -->
+            <div class="column is-7-desktop">
+                <!-- Sección de Historia -->
+                <section id="historia" class="content-box">
+                    <h2 class="section-title-custom">Historia</h2>
+                    <p class="mb-4 text-body">
+                        La historia se desarrolla en Krat, una metrópolis antaño próspera gracias a la industria de los títeres mecánicos creados por Gepetto. Sin embargo, una tragedia conocida como la «Fiebre de las Títeres» convierte a los autómatas en máquinas sedientas de sangre que masacran a los habitantes.
+                    </p>
+                    <p class="mb-4 text-body">
+                        Pinocho despierta en un vagón de tren abandonado. Sin rastro de su creador, es guiado hasta el Hotel Krat, refugio de los pocos supervivientes. A lo largo de su travesía por calles lúgubres y callejones empapados de Ergo, Pinocho descubre que posee una cualidad única prohibida para los autómatas: la capacidad de mentir, lo que altera su humanidad y define su destino.
+                    </p>
+                    <article class="message is-dark" style="background-color: #161a24; border-left: 4px solid var(--lop-gold);">
+                        <div class="message-body" style="color: #cbd5e1; font-style: italic; border-color: transparent;">
+                            "En el universo de Lies of P, la mentira no es un simple pecado, sino el único camino mecánico y emocional para convertirse en un ser humano real y desafiar las estrictas Leyes de los Títeres."
+                        </div>
+                    </article>
+                </section>
+
+                <!-- Sección de Estadísticas -->
+                <section id="estadisticas" class="content-box">
+                    <h2 class="section-title-custom">Estadísticas</h2>
+                    <p class="mb-4" style="font-size: 0.9rem; color: #9ca3af;">
+                        Atributos de combate y mecánicas especiales basados en su desempeño con armas ensamblables y el sistema de Ergo.
+                    </p>
+
+                    <!-- Estadística 1: Vitalidad / Salud -->
+                    <div class="is-flex is-justify-content-space-between is-align-items-center">
+                        <span class="has-text-weight-semibold" style="color: #e2e8f0;">Vitalidad (Salud y Guardia)</span>
+                        <span class="has-text-weight-bold" style="color: var(--lop-gold);">4/5</span>
+                    </div>
+                    <div class="stat-bar-container">
+                        <div class="stat-segment active-red"></div>
+                        <div class="stat-segment active-red"></div>
+                        <div class="stat-segment active-red"></div>
+                        <div class="stat-segment active-red"></div>
+                        <div class="stat-segment"></div>
+                    </div>
+
+                    <!-- Estadística 2: Motilidad / Ataque Físico -->
+                    <div class="is-flex is-justify-content-space-between is-align-items-center">
+                        <span class="has-text-weight-semibold" style="color: #e2e8f0;">Motilidad (Ataque Pesado)</span>
+                        <span class="has-text-weight-bold" style="color: var(--lop-gold);">3/5</span>
+                    </div>
+                    <div class="stat-bar-container">
+                        <div class="stat-segment active-blue"></div>
+                        <div class="stat-segment active-blue"></div>
+                        <div class="stat-segment active-blue"></div>
+                        <div class="stat-segment"></div>
+                        <div class="stat-segment"></div>
+                    </div>
+
+                    <!-- Estadística 3: Técnica / Agilidad -->
+                    <div class="is-flex is-justify-content-space-between is-align-items-center">
+                        <span class="has-text-weight-semibold" style="color: #e2e8f0;">Técnica (Velocidad y Críticos)</span>
+                        <span class="has-text-weight-bold" style="color: var(--lop-gold);">4/5</span>
+                    </div>
+                    <div class="stat-bar-container">
+                        <div class="stat-segment active-blue"></div>
+                        <div class="stat-segment active-blue"></div>
+                        <div class="stat-segment active-blue"></div>
+                        <div class="stat-segment active-blue"></div>
+                        <div class="stat-segment"></div>
+                    </div>
+
+                    <!-- Estadística 4: Avance / Fábulas y Legión -->
+                    <div class="is-flex is-justify-content-space-between is-align-items-center">
+                        <span class="has-text-weight-semibold" style="color: #e2e8f0;">Avance (Brazo de Legión / Fábulas)</span>
+                        <span class="has-text-weight-bold" style="color: var(--lop-gold);">5/5</span>
+                    </div>
+                    <div class="stat-bar-container">
+                        <div class="stat-segment active-red"></div>
+                        <div class="stat-segment active-red"></div>
+                        <div class="stat-segment active-red"></div>
+                        <div class="stat-segment active-red"></div>
+                        <div class="stat-segment active-red"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer py-4" style="background-color: #0b0d12; border-top: 1px solid #1e2532; color: #6b7280;">
+        <div class="container has-text-centered">
+            <p style="font-size: 0.85rem;">
+                Examen Práctico de Unidad &bull; Maquetación Web con HTML5 Semántico y Bulma &bull; Inspirado en <em>Lies of P</em>
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
